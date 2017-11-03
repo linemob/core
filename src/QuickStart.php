@@ -27,6 +27,7 @@ use LineMob\Core\Message\ImageCarouselMessage;
 use LineMob\Core\Message\ImageMapMessage;
 use LineMob\Core\Message\ImageMessage;
 use LineMob\Core\Message\LocationMessage;
+use LineMob\Core\Message\MultiMessage;
 use LineMob\Core\Message\StickerMessage;
 use LineMob\Core\Message\TextMessage;
 use LineMob\Core\Message\VideoMessage;
@@ -80,6 +81,7 @@ class QuickStart
         $factory->add(new CarouselMessage());
         $factory->add(new ImageMessage());
         $factory->add(new ImageMapMessage());
+        $factory->add(new MultiMessage());
         $factory->add(new TextMessage());
         $factory->add(new LocationMessage());
         $factory->add(new StickerMessage());
