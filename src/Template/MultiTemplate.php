@@ -29,6 +29,21 @@ class MultiTemplate extends AbstractTemplate
     /**
      * @var string
      */
+    public $text;
+
+    /**
+     * @var string
+     */
+    public $packageId;
+
+    /**
+     * @var string
+     */
+    public $stickerId;
+
+    /**
+     * @var string
+     */
     public $image;
 
     /**
@@ -47,13 +62,13 @@ class MultiTemplate extends AbstractTemplate
             switch ($message->getType()) {
                 case 'text':
                     $mmb->add(new TextMessageBuilder(
-                        $message->getReplyMessage()->text
+                        $this->text
                     ));
                     break;
                 case 'sticker':
                     $mmb->add(new StickerMessageBuilder(
-                        $message->getReplyMessage()->packageId,
-                        $message->getReplyMessage()->packageCode
+                        $this->packageId,
+                        $this->stickerId
                     ));
                     break;
                 case 'image':
