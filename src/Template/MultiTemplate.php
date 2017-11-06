@@ -27,58 +27,28 @@ class MultiTemplate extends AbstractTemplate
     public $multiMessage;
 
     /**
-     * @var string
-     */
-    public $type;
-
-    /**
-     * @var string
-     */
-    public $text;
-
-    /**
-     * @var string
-     */
-    public $packageId;
-
-    /**
-     * @var string
-     */
-    public $stickerId;
-
-    /**
-     * @var string
-     */
-    public $image;
-
-    /**
-     * @var string
-     */
-    public $imagePreview;
-
-    /**
      * {@inheritdoc}
      */
     public function getTemplate()
     {
         $mmb = new MultiMessageBuilder();
         foreach ($this->multiMessage as $message) {
-            switch ($message->getType()) {
+            switch ($message['type']) {
                 case 'text':
                     $mmb->add(new TextMessageBuilder(
-                        $this->text
+                        $message['text']
                     ));
                     break;
                 case 'sticker':
                     $mmb->add(new StickerMessageBuilder(
-                        $this->packageId,
-                        $this->stickerId
+                        $message['packageId'],
+                        $message['stickerId']
                     ));
                     break;
                 case 'image':
                     $mmb->add(new ImageMessageBuilder(
-                        $this->image,
-                        $this->imagePreview
+                        $message['image'],
+                        $message['imagePreview']
                     ));
                     break;
             }
