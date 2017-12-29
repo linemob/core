@@ -55,4 +55,16 @@ interface CommandDataInterface
      * @param array
      */
     public function setLineCommandData(array $lineCommandData);
+
+    /**
+     * Clear line active command
+     */
+    public function clearLineActiveCmd();
+
+    /**
+     * @param array
+     *
+     * Merge line command data
+     */
+    public function mergeLineCommandData(array $data);
 }

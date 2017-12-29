@@ -99,4 +99,21 @@ class CommandData implements CommandDataInterface
     {
         $this->lineActiveCmdExpiredAt = $lineActiveCmdExpiredAt;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clearLineActiveCmd()
+    {
+        $this->lineActiveCmd = null;
+        $this->lineActiveCmdExpiredAt = null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function mergeLineCommandData(array $data)
+    {
+        $this->lineCommandData = array_replace_recursive($this->lineCommandData, $data);
+    }
 }
