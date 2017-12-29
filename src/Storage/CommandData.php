@@ -27,6 +27,11 @@ class CommandData implements CommandDataInterface
     protected $lineActiveCmd;
 
     /**
+     * @var \Datetime
+     */
+    protected $lineActiveCmdExpiredAt;
+
+    /**
      * @var array
      */
     protected $lineCommandData = [];
@@ -77,5 +82,21 @@ class CommandData implements CommandDataInterface
     public function setLineCommandData(array $lineCommandData)
     {
         $this->lineCommandData = $lineCommandData;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLineActiveCmdExpiredAt()
+    {
+        return $this->lineActiveCmdExpiredAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLineActiveCmdExpiredAt(\DateTime $lineActiveCmdExpiredAt = null)
+    {
+        $this->lineActiveCmdExpiredAt = $lineActiveCmdExpiredAt;
     }
 }

@@ -37,6 +37,16 @@ interface CommandDataInterface
     public function setLineActiveCmd($lineActiveCmd);
 
     /**
+     * @return \Datetime
+     */
+    public function getLineActiveCmdExpiredAt();
+
+    /**
+     * @param \DateTime|null $lineActiveCmdExpiredAt
+     */
+    public function setLineActiveCmdExpiredAt(\DateTime $lineActiveCmdExpiredAt = null);
+
+    /**
      * @return array
      */
     public function getLineCommandData();
