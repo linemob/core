@@ -6,9 +6,17 @@ use LineMob\Core\Input;
 use LineMob\Core\Mocky\Auth\Command\BaseCommand;
 use LineMob\Core\Mocky\Doctrine\Model\User;
 use LineMob\Core\Workflow\AbstractWorkflow;
+use Symfony\Component\Workflow\Workflow;
 
 class AuthenticationWorkflow extends AbstractWorkflow
 {
+    protected $mappingMethods = [
+        'doApplyStart',
+        'doApplyEnterUsernameAndPassword',
+        'doApplyEnterUsername',
+        'doApplyEnterPassword'
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -65,13 +73,13 @@ class AuthenticationWorkflow extends AbstractWorkflow
 
     /**
      * @param BaseCommand $command
+     * @param Workflow $workflow
      *
      * @return bool
      */
-    public function doApplyStart(BaseCommand $command)
+    public function doApplyStart(BaseCommand $command, Workflow $workflow)
     {
-        $workflow = $this->registry->get($subject = $command->storage);
-
+        $subject = $command->storage;
         if ($workflow->can($subject, 'start')) {
             $workflow->apply($subject, 'start');
 
@@ -85,12 +93,13 @@ class AuthenticationWorkflow extends AbstractWorkflow
 
     /**
      * @param BaseCommand $command
+     * @param Workflow $workflow
      *
      * @return bool
      */
-    public function doApplyEnterUsernameAndPassword(BaseCommand $command)
+    public function doApplyEnterUsernameAndPassword(BaseCommand $command, Workflow $workflow)
     {
-        $workflow = $this->registry->get($subject = $command->storage);
+        $subject = $command->storage;
 
         @list($username, $password) = $this->captureUserAndPassword($command->input);
 
@@ -115,12 +124,13 @@ class AuthenticationWorkflow extends AbstractWorkflow
 
     /**
      * @param BaseCommand $command
+     * @param Workflow $workflow
      *
      * @return bool
      */
-    public function doApplyEnterUsername(BaseCommand $command)
+    public function doApplyEnterUsername(BaseCommand $command, Workflow $workflow)
     {
-        $workflow = $this->registry->get($subject = $command->storage);
+        $subject = $command->storage;
         $username = $this->captureUserAndPassword($command->input)[0];
 
         if ($username && $workflow->can($subject, 'enter_username')) {
@@ -140,12 +150,13 @@ class AuthenticationWorkflow extends AbstractWorkflow
 
     /**
      * @param BaseCommand $command
+     * @param Workflow $workflow
      *
      * @return bool
      */
-    public function doApplyEnterPassword(BaseCommand $command)
+    public function doApplyEnterPassword(BaseCommand $command, Workflow $workflow)
     {
-        $workflow = $this->registry->get($subject = $command->storage);
+        $subject = $command->storage;
         $password = $this->captureUserAndPassword($command->input)[0];
 
         if ($password && $workflow->can($subject, 'enter_password')) {

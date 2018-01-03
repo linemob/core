@@ -35,19 +35,7 @@ class AuthenticationMiddleware implements Middleware
         $command->active = true;
         $command->message = new TextTemplate();
 
-        if ($this->workflow->doApplyStart($command)) {
-            return $next($command);
-        }
-
-        if ($this->workflow->doApplyEnterUsernameAndPassword($command)) {
-            return $next($command);
-        }
-
-        if ($this->workflow->doApplyEnterUsername($command)) {
-            return $next($command);
-        }
-
-        if ($this->workflow->doApplyEnterPassword($command)) {
+        if ($this->workflow->apply($command)) {
             return $next($command);
         }
 
