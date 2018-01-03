@@ -8,7 +8,7 @@ use LineMob\Core\Mocky\Doctrine\Model\User;
 use LineMob\Core\Workflow\AbstractWorkflow;
 use Symfony\Component\Workflow\Workflow;
 
-class AuthenticationWorkflow extends AbstractWorkflow
+class AuthenticationFlow extends AbstractWorkflow
 {
     protected $mappingMethods = [
         'doApplyStart',

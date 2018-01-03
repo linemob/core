@@ -6,7 +6,7 @@ use LineMob\Core\Middleware\CommandSwitcherMiddleware;
 use LineMob\Core\Middleware\DummyFallbackMiddleware;
 use LineMob\Core\Middleware\DumpLogMiddleware;
 use LineMob\Core\Middleware\StoreActiveCmdMiddleware;
-use LineMob\Core\Mocky\Auth\AuthenticationWorkflow;
+use LineMob\Core\Mocky\Auth\AuthenticationFlow;
 use LineMob\Core\Mocky\Auth\Command\ClearActiveCommand;
 use LineMob\Core\Mocky\Auth\Command\LoginCommand;
 use LineMob\Core\Mocky\Auth\Command\LogoutCommand;
@@ -62,7 +62,7 @@ class Setup
                 new CommandSwitcherMiddleware(),
                 new StoreActiveCmdMiddleware(),
                 new LogoutMiddleware(),
-                new AuthenticationMiddleware(new AuthenticationWorkflow(new WorkflowRegistry(null, true))),
+                new AuthenticationMiddleware(new AuthenticationFlow(new WorkflowRegistry(null, true))),
                 new DummyFallbackMiddleware(),
                 new StoragePersistMiddleware(),
                 new DumpLogMiddleware(true),

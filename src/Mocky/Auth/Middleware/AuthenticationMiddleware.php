@@ -3,18 +3,18 @@
 namespace LineMob\Core\Mocky\Auth\Middleware;
 
 use League\Tactician\Middleware;
-use LineMob\Core\Mocky\Auth\AuthenticationWorkflow;
+use LineMob\Core\Mocky\Auth\AuthenticationFlow;
 use LineMob\Core\Mocky\Auth\Command\LoginCommand;
 use LineMob\Core\Template\TextTemplate;
 
 class AuthenticationMiddleware implements Middleware
 {
     /**
-     * @var AuthenticationWorkflow
+     * @var AuthenticationFlow
      */
     private $workflow;
 
-    public function __construct(AuthenticationWorkflow $workflow)
+    public function __construct(AuthenticationFlow $workflow)
     {
         $this->workflow = $workflow;
     }
