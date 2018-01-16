@@ -33,27 +33,13 @@ class MultiTemplate extends AbstractTemplate
     {
         $mmb = new MultiMessageBuilder();
         foreach ($this->multiMessage as $message) {
-            switch ($message['type']) {
-                case 'text':
-                    $mmb->add(new TextMessageBuilder(
-                        $message['text']
-                    ));
-                    break;
-                case 'sticker':
-                    $mmb->add(new StickerMessageBuilder(
-                        $message['packageId'],
-                        $message['stickerId']
-                    ));
-                    break;
-                case 'image':
-                    $mmb->add(new ImageMessageBuilder(
-                        $message['image'],
-                        $message['imagePreview']
-                    ));
-                    break;
+            if (!$message instanceof AbstractTemplate) {
+                continue;
             }
+
+            $mmb->add($message->getTemplate());
         }
-        
+
         return $mmb;
     }
 }
